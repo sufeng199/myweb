@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* 背景：可拖动，超大图 */
+  #bg {
+    position: fixed;
+    width: 300%;
+    height: 300%;
+    background: url(https://picsum.photos/1920/1080);
+    background-size: cover;
+    cursor: grab;
+  }
+
+  /* 上面模糊块：固定不动！！！ */
+  #blur-area {
+    position: fixed;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 500px;
+    height: 200px;
+    
+    /* 核心：真正的动态实时模糊 */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    
+    background: rgba(0,0,0,0.1);
+  }
+</style>
+</head>
+
+<body>
+
+<div id="bg"></div>
+<div id="blur-area"></div>
+
+<script>
+let bg = document.getElementById('bg');
+let isDrag = false;
+let x = 0, y = 0;
+let startX, startY;
+
+bg.onmousedown = (e) => {
+  isDrag = true;
+  startX = e.clientX - x;
+  startY = e.clientY - y;
+};
+
+document.onmousemove = (e) => {
+  if (!isDrag) return;
+  x = e.clientX - startX;
+  y = e.clientY - startY;
+  bg.style.transform = `translate(${x}px, ${y}px)`;
+};
+
+document.onmouseup = () => {
+  isDrag = false;
+};
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
