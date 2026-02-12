@@ -1,117 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>B站演示</title>
 <style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  body {
-    height: 100vh;
-    overflow: hidden;
-  }
-
-  /* 背景：可拖动，超大图 */
-  #bg {
-    position: fixed;
-    width: 300%;
-    height: 300%;
-    background: url(https://picsum.photos/1920/1080);
-    background-size: cover;
-    cursor: grab;
-  }
-
-  /* 上面模糊块：固定不动！！！ */
-  #blur-area {
-    position: fixed;
-    top: 100px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 500px;
-    height: 200px;
-    
-    /* 核心：真正的动态实时模糊 */
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    
-    background: rgba(0,0,0,0.1);
-  }
+*{margin:0;padding:0;box-sizing:border-box}
+body{height:100vh;overflow:hidden;font-family:system-ui,sans-serif}
+#bg{position:fixed;width:300%;height:300%;background:url(https://picsum.photos/id/1039/2560/1440);background-size:cover;cursor:grab;z-index:0}
+#blur-top{position:fixed;top:0;left:0;width:100%;height:60px;z-index:10;backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px);background:rgba(255,255,255,0.3);display:flex;align-items:center;padding:0 15px;gap:12px}
+.logo{width:32px;height:32px;background:#fb7299;border-radius:6px}
+.search{flex:1;height:36px;background:rgba(255,255,255,0.5);border-radius:18px}
+.user{width:34px;height:34px;background:#fb7299;border-radius:50%}
+#blur-bottom{position:fixed;bottom:0;left:0;width:100%;height:55px;z-index:10;backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px);background:rgba(255,255,255,0.3);display:flex;justify-content:space-around;align-items:center}
+.tab{width:26px;height:26px;background:rgba(0,0,0,0.2);border-radius:4px}
 </style>
 </head>
-
 <body>
-
 <div id="bg"></div>
-<div id="blur-area"></div>
-
+<div id="blur-top"><div class="logo"></div><div class="search"></div><div class="user"></div></div>
+<div id="blur-bottom"><div class="tab"></div><div class="tab"></div><div class="tab"></div><div class="tab"></div><div class="tab"></div></div>
 <script>
-let bg = document.getElementById('bg');
-let isDrag = false;
-let x = 0, y = 0;
-let startX, startY;
-
-bg.onmousedown = (e) => {
-  isDrag = true;
-  startX = e.clientX - x;
-  startY = e.clientY - y;
-};
-
-document.onmousemove = (e) => {
-  if (!isDrag) return;
-  x = e.clientX - startX;
-  y = e.clientY - startY;
-  bg.style.transform = `translate(${x}px, ${y}px)`;
-};
-
-document.onmouseup = () => {
-  isDrag = false;
-};
+let bg=document.getElementById('bg'),isDrag=!1,x=0,y=0,startX,startY;
+bg.onmousedown=e=>{isDrag=!0;startX=e.clientX-x;startY=e.clientY-y}
+document.onmousemove=e=>{if(!isDrag)return;x=e.clientX-startX;y=e.clientY-startY;bg.style.transform=`translate(${x}px,${y}px)`}
+document.onmouseup=()=>{isDrag=!1}
 </script>
-
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
