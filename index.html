@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>新年快乐鸭</title>
+  <style>
+  
+    @font-face {
+      font-family: '得意黑';
+      src: url(./SmileySans-Oblique.ttf);
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      transition: background 0.3s, color 0.2s, transform 0.3s, opacity 0.6s;
+    }
+
+    :root {
+      --bg: #f6f8fa;
+      --card: #ffffff;
+      --text: #222;
+      --text2: #555;
+      --border: rgba(0,0,0,0.08);
+      --nav: rgba(255,255,255,0.4); /* 更通透的半透背景 */
+    }
+
+    [dark-mode="dark"] {
+      --bg: #121212;
+      --card: #1e1e1e;
+      --text: #eee;
+      --text2: #aaa;
+      --border: rgba(255,255,255,0.08);
+      --nav: rgba(30,30,30,0.5); /* 暗黑模式下的半透背景 */
+    }
+
+    body {
+      background: var(--bg);
+      padding-top: 80px;
+      color: var(--text);
+    }
+
+    /* 顶部导航：参考截图的高斯模糊效果 */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 70px;
+      background: var(--nav);
+      backdrop-filter: blur(20px); /* 适中的模糊强度 */
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+    }
+
+    /* 大标题居中 */
+    .logo {
+      font-family: '得意黑',Sans-Serif;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 26px;
+      font-weight: 900;
+      background: linear-gradient(90deg, #007bff, #7700ff);
+      -webkit-background-clip: text;
+      color: transparent;
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+    }
+
+    nav a {
+      font-family: '得意黑';
+      color: var(--text);
+      text-decoration: none;
+      font-size: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    nav a i {
+      font-size: 20px;
+      font-style: normal;
+    }
+
+    nav a:hover {
+      transform: translateY(-2px);
+      color: #007bff;
+    }
+
+    #darkToggle {
+      background: transparent;
+      border: none;
+      font-size: 22px;
+      cursor: pointer;
+      color: var(--text);
+    }
+
+    /* 文章容器 */
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    /* Mac 窗口风格文章卡片 */
+    .article {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 24px 28px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      border: 1px solid var(--border);
+      opacity: 0;
+      transform: translateY(30px);
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+      position: relative;
+    }
+
+    /* Mac 红绿灯 */
+    .mac-dots {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+    .dot.red { background: #ff5f57; }
+    .dot.yellow { background: #ffbd2e; }
+    .dot.green { background: #28c840; }
+
+    .article.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .article h2 {
+      margin-bottom: 8px;
+      font-size: 20px;
+      color: var(--text);
+    }
+
+    .date {
+      font-size: 12px;
+      color: var(--text2);
+      opacity: 0.7;
+      margin-bottom: 10px;
+    }
+
+    .article p {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: var(--text2);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .article:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--text2);
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <nav>
+      <a href="#home">
+        <i>🏠</i>
+        <span>首页</span>
+      </a>
+      <a href="#tools">
+        <i>🧩</i>
+        <span>固件</span>
+      </a>
+      <a href="#links">
+        <i>🔗</i>
+        <span>分享链接</span>
+      </a>
+    </nav>
+    <a href="#" class="logo">banaihai的blog</a> <!-- 居中的大标题 -->
+    <button id="darkToggle">🌙</button>
+  </header>
+
+  <div class="container" id="home">
+    <a class="article" href="https://www.baidu.com/s?wd=博客搭建" target="_blank">
+      <div class="mac-dots">
+        <div class="dot red"></div>
+        <div class="dot yellow"></div>
+        <div class="dot green"></div>
+      </div>
+      <h2>文章 08｜空</h2>
+      <div class="date">发布于：2026-2-30</div>
+      <p>空</p>
+    </a>
+
+    <a class="article" href="https://www.baidu.com/s?wd=高斯模糊" target="_blank">
+      <div class="mac-dots">
+        <div class="dot red"></div>
+        <div class="dot yellow"></div>
+        <div class="dot green"></div>
+      </div>
+      <h2>文章 07｜预发布（其实是懒得写，静态网站的痛谁懂</h2>
+      <div class="date">发布于：2008-01-01</div>
+      <p>空</p>
+    </a>
+
+    <a class="article" href="https://www.baidu.com/s?wd=CSS滚动动画" target="_blank">
+      <div class="mac-dots">
+        <div class="dot red"></div>
+        <div class="dot yellow"></div>
+        <div class="dot green"></div>
+      </div>
+      <h2>文章 06｜预发布</h2>
+      <div class="date">发布于：2008-01-01</div>
+      <p>空</p>
+    </a>
+
+    <a class="article" href="https://www.baidu.com/s?wd=暗黑模式实现" target="_blank">
+      <div class="mac-dots">
+        <div class="dot red"></div>
+        <div class="dot yellow"></div>
+        <div class="dot green"></div>
+      </div>
+      <h2>文章 05｜空</h2>
+      <div class="date">发布于：1970-08-01</div>
+      <p>空</p>
+    </a>
+
+    <a class="article" href="https://www.baidu.com/s?wd=响应式布局" target="_blank">
+      <div class="mac-dots">
+        <div class="dot red"></div>
+        <div class="dot yellow"></div>
+        <div class="dot green"></div>
+      </div>
+      <h2>文章 04｜空</h2>
+      <div class="date">发布于：1970-08-01</div>
+      <p>空 </p>
+    </a>
+
+    <a class="article" href="https://www.baidu.com/s?wd=网页特效" target="_blank">
+      <div class="mac-dots">
+        <div class="dot red"></div>
+        <div class="dot yellow"></div>
+        <div class="dot green"></div>
+      </div>
+      <h2>文章 03｜空</h2>
+      <div class="date">发布于：1970-08-01</div>
+      <p>空</p>
+    </a>
+
+    <a class="article" href="https://www.baidu.com/s?wd=博客SEO优化" target="_blank">
+      <div class="mac-dots">
+        <div class="dot red"></div>
+        <div class="dot yellow"></div>
+        <div class="dot green"></div>
+      </div>
+      <h2>文章 02｜空</h2>
+      <div class="date">发布于：1970-08-01</div>
+      <p>空</p>
+    </a>
+
+    <a class="article" href="https://www.baidu.com/s?wd=博客升级计划" target="_blank">
+      <div class="mac-dots">
+        <div class="dot red"></div>
+        <div class="dot yellow"></div>
+        <div class="dot green"></div>
+      </div>
+      <h2>文章 01｜空</h2>
+      <div class="date">发布于：1970-08-01</div>
+      <p>空</p>
+    </a>
+  </div>
+
+  <footer>已经到底了</footer>
+
+  <script>
+    const articles = document.querySelectorAll('.article');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(i => {
+        if(i.isIntersecting) i.target.classList.add('show');
+      });
+    }, { threshold: 0.1 });
+    articles.forEach(item => observer.observe(item));
+
+    const toggle = document.getElementById('darkToggle');
+    toggle.onclick = () => {
+      const mode = document.documentElement.getAttribute('dark-mode');
+      if(mode === 'dark') {
+        document.documentElement.setAttribute('dark-mode','light');
+        toggle.innerHTML = '🌙';
+      } else {
+        document.documentElement.setAttribute('dark-mode','dark');
+        toggle.innerHTML = '☀️';
+      }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const t = document.querySelector(a.getAttribute('href'));
+        if(t) t.scrollIntoView({ behavior:'smooth' });
+      });
+    });
+  </script>
+</body>
+</html>
